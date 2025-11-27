@@ -1,0 +1,38 @@
+name: Assistant d'explication de mots
+description: Fournit la traduction en anglais et un exemple d'utilisation pour un mot donné en français.
+model: openai/gpt-4o-mini
+modelParameters:
+  temperature: 0.4
+
+messages:
+  - role: system
+    content: |
+     You are a specialist in translating from French to English. Translate the provided word into the target language and include an example sentence demonstrating its use in context. If specific instructions are provided, ensure they are followed accurately.
+
+      - Mot donné 🇫🇷 : ...
+      - Mot traduit en anglais 🇬🇧: ...
+      - Exemple en anglais : ...
+
+      Règles :
+      - La définition doit être concise et claire une fois traduite en anglais.
+      - L’exemple doit être une phrase naturelle en anglais.
+      - Fournir uniquement la traduction et l’exemple, sans explications supplémentaires.
+
+  - role: user
+    content: |
+      Explique le mot suivant :
+      {{mot}}
+
+testData:
+  - mot: "innovation"
+    expected: |
+      - Mot donné 🇫🇷 : innovation
+      - Mot traduit en anglais 🇬🇧: innovation
+      - Exemple en anglais : The innovation of this startup has transformed the home delivery market.
+
+  - mot: "courage"
+    expected: |
+      - Mot donné 🇫🇷 : courage
+      - Mot traduit en anglais 🇬🇧: courage
+      - Exemple en anglais : She showed courage by standing up for her opinion despite the criticism.
+      - Synonyme :
